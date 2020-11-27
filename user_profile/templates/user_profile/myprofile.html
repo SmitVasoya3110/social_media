@@ -31,8 +31,59 @@ my profile
     </form>
   </div>
 </div>
+
+<div class="ui segment">
 {% if confirm %}
 <div class="ui green message">Your Profile Has Been Updated</div>
 {% endif %}
-<button class="ui secondary button" id="modal-btn">Update Your Profile</button>
+  <h3>my profile : {{request.user}}</h3>
+  <div class="ui grid">
+
+    <div class="row">
+      <div class="six wide colunm">
+        <img class="ui medium rounded image" src="{{profile.avatar.url}}">
+        <div class="row mt-5">
+          <button class="ui secondary button mt-5" id="modal-btn">Update Your Profile</button>
+        </div>
+      </div>
+      <div class="ten wide column">
+          <table class="ui table">
+            <tbody>
+              <tr>
+                <td>Username</td>
+                <td>{{profile.user}}</td>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>{{profile.first_name}}</td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>{{profile.last_name}}</td>
+              </tr>
+              <tr>
+                <td>Bio</td>
+                <td>{{profile.bio}}</td>
+              </tr>
+              <tr>
+                <td>Number of Friends</td>
+                <td>{{profile.get_friends_no}}</td>
+              </tr>
+              <tr>
+                <td>Friends</td>
+                <td>
+                  <ul>
+                  {% for friend in profile.get_friends %}
+                  <li>{{friend}}</li>
+                  {% endfor %}
+                </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
