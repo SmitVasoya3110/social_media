@@ -31,7 +31,7 @@ class Profile(models.Model):
     def get_all_authors_post(self):
         return self.posts.all()
 
-    def get_likes_given(self):
+    def get_likes_given_no(self):
         likes = self.like_set.all()
         total_liked = 0
         for item in likes:
@@ -43,7 +43,7 @@ class Profile(models.Model):
         posts = self.posts.all()
         total_liked = 0
         for item in posts:
-            total_liked += item.likes.all().count()
+            total_liked += item.liked.all().count()
         return total_liked
     def __str__(self):
         return f"{self.user.username}-{self.created.strftime('%d-%m-%y')}"
