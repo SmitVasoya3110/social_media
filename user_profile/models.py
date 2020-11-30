@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 
 from .utils import get_random_code
 
+
 # Create your models here.
 class Profile(models.Model):
     first_name = models.CharField(max_length=200, blank=True)
@@ -12,12 +13,11 @@ class Profile(models.Model):
     bio = models.TextField(default="no bio....", max_length=300)
     email = models.EmailField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    avatar = models.ImageField(default="avatar.png",upload_to='avatars/')
+    avatar = models.ImageField(default="avatar.png", upload_to='avatars/')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-
 
     def get_friends(self):
         return self.friends.all()
@@ -45,6 +45,7 @@ class Profile(models.Model):
         for item in posts:
             total_liked += item.liked.all().count()
         return total_liked
+
     def __str__(self):
         return f"{self.user.username}-{self.created.strftime('%d-%m-%y')}"
 
@@ -65,14 +66,14 @@ class Profile(models.Model):
 
 
 STATUS_CHOICES = (
-    ('send','send'),
+    ('send', 'send'),
     ('accepted', 'accepted')
 )
 
-class Relationship(models.Model):
 
-    sender = models.ForeignKey(Profile, on_delete=models.CASCADE,related_name='sender')
-    receiver = models.ForeignKey(Profile, on_delete=models.CASCADE,related_name='receiver')
+class Relationship(models.Model):
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='receiver')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

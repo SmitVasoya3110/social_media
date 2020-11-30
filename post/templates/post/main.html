@@ -32,14 +32,30 @@ posts
                         </form>
 
                     </div>
+                    <div>
+                        {% if obj.comment_set.all %}
+                        {% for com in obj.comment_set.all %}
+                        <p>{{com.body}}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <form action="" method="post" class="ui form">
+                        {% csrf_token %}
+                        {{comment_form}}
+                        <input type="hidden" name="post-id" value="{{obj.id}}">
+                        <button class="ui primary button mt-5" name="comment-form">Comment</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
         <div class="five wide column">
+            {% if post_added %}
+                <div class="ui green message">Post Added</div>
+            {% endif %}
             <form action="" method="post" class="ui form" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{post_form}}
-                <button type="submit" class="ui button positive mt-5">Send Post</button>
+                <button type="submit" class="ui button positive mt-5" name="post-form">Send Post</button>
             </form>
 
         </div>
