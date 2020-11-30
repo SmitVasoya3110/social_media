@@ -43,7 +43,7 @@ class Like(models.Model):
     user =  models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     value = models.CharField(choices=LIKE_CHOICES, max_length=8)
-    updated = models.DateField(auto_created=True)
+    updated = models.DateField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

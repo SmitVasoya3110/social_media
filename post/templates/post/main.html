@@ -6,8 +6,43 @@ posts
 
 {% block content %}
 
-{% for obj in qs %}
-<p>{{obj.content}}</p>
+<div class="ui grid">
+    <div class="row">
+        <div class="eleven wide column">
+            {% for obj in qs %}
+                <div class="ui fluid card">
+                    <div class="content">
+                        {{obj.content}}
+                        {% if obj.image %}
+                        <img src="{{obj.image.url}}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <form action="{% url 'post:liked-post-view' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{obj.id}}">
+                            <button type="submit" class="ui primary button">
+                                {% if profile not in obj.liked.all %}
+                                    <i class="thumbs up icon"></i>&nbsp;Like
+                                {% else %}
+                                    <i class="thumbs down icon"></i>&nbsp;Unlike
+                                {% endif %}
+                            </button>
+                            &nbsp;{{obj.num_likes}}
+                        </form>
 
-{% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="five wide column">
+            <form action="" method="post" class="ui form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{post_form}}
+                <button type="submit" class="ui button positive mt-5">Send Post</button>
+            </form>
+
+        </div>
+    </div>
+</div>
 {% endblock %}
