@@ -26,3 +26,27 @@ margin-top:5px !important;
 .ml-3{
 margin-left:1.5rem !important;
 }
+.mb-5{
+    margin-bottom: 5px !important;
+}
+
+.bwhite-lg{
+background-color: transparent !important;
+}
+.bwhite-sm{
+    background-color: transparent !important;
+    width: 0.8rem !important;
+}
+.w-big{
+    width:200px !important;
+}
+
+.comment-box{
+    display:none;
+}
+.like-btn{
+    color: purple !important;
+}
+/* .pic{
+    max-width:54% !important;
+} */

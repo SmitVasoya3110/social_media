@@ -1,10 +1,18 @@
+{% url 'home-view' as path_to_home   %}
+{% url 'post:main-post-view' as path_to_post %}
+{% url 'user_profile:my-profile-view' as path_to_myprofile %}
+{% url 'user_profile:my-invites-view' as path_to_myinvites %}
+{% url 'user_profile:invite-profiles-view' as path_to_invites %}
+{% url 'user_profile:profile-view' as path_to_profile %}
+
+
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
-      <a href="" class="item">
+      <a href="{{path_to_home}}" class="{% if request.path == path_to_home %} active {% endif %} item">
           <h3>bffbook</h3>
       </a>
-      <a href="" class="item">
-          Home
+      <a href="{{path_to_post}}" class="{% if request.path == path_to_post %} active {% endif %} item">
+          Board
       </a>
       
       {% comment %}
@@ -20,13 +28,13 @@
               <div class="ui floating dropdown icon button teal"> Friends
                   <i class="dropdown icon"></i>
                   <div class="menu">
-                      <a href="" class="item">
+                      <a href="{{path_to_profile}}" class="{% if request.path == path_to_profile %} active {% endif %} item">
                           All Profiles
                       </a>
-                      <a href="" class="item">
+                      <a href="{{path_to_invites}}" class="{% if request.path == path_to_invites %} active {% endif %} item">
                           Send Invites
                       </a>
-                      <a href="" class="item">
+                      <a href="{{path_to_myinvites}}" class="{% if request.path == path_to_myinvites %} active {% endif %} item">
                           Received Invites
                       </a>
                   </div>
@@ -42,7 +50,7 @@
               </form>
               </div>
           
-              <a href="" class="item">
+              <a href="{{path_to_myprofile}}" class="{% if request.path == path_to_myprofile %} active {% endif %} item">
                    {{ request.user }}
               </a>
   

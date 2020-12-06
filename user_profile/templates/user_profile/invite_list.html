@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Invite Friends
+{% endblock title %}
+
+{% block content %}  
+ {% comment %}
+ <div class="ui grid">
+  <div class="row">
+  {% for item in qs %}
+        <div class="eight wide column">
+            <div class="ui segment mb-5">
+                <div class="three wide column">
+                  <img src="{{item.avatar.url}}" alt="" class="ui small circular image">
+                </div>
+                <div class="eleven wide column">
+                  <h3>{{item.user}}</h3>
+                  <p>{{item.bio}}</p>
+                </div>
+            </div>
+          </div>
+    {% endfor %}
+    </div> 
+</div> 
+ {% endcomment %} 
+
+     <ul>
+         {% for item in qs %}
+             <li>{{item}}</li>
+         {% endfor %}
+     </ul>
+ {% endblock content %}
+       
+  
